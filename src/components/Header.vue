@@ -1,20 +1,51 @@
 <template>
-    <nav
-        class="vh-100 overflow-auto max-vh-100 d-flex flex-column text-center text-light fs-4 bg-dark py-3"
-    >
-        <router-link to="/" class="nav-link px-5 py-2 my-1">About</router-link>
-        <router-link to="/sd" class="nav-link px-5 py-2 my-1"
-            >AddStamp</router-link
-        >
-        <router-link to="/sd" class="nav-link px-5 py-2 my-1"
-            >AddStamp</router-link
-        ><router-link to="/sd" class="nav-link px-5 py-2 my-1"
-            >AddStamp</router-link
-        ><router-link to="/sd" class="nav-link px-5 py-2 my-1"
-            >AddStamp</router-link
-        ><router-link to="/sd" class="nav-link px-5 py-2 my-1"
-            >AddStamp</router-link
-        >
+    <nav class="navbar bg-dark text-light fs-3">
+        <div class="container-fluid">
+            <a href="https://pdfcpu.io/" target="_blank" class="nav-link fs-2"
+                >PdfCpu</a
+            >
+            <button
+                class="navbar-toggler bg-light"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+                class="offcanvas offcanvas-end bg-dark text-light"
+                tabindex="-1"
+                id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel"
+            >
+                <div class="offcanvas-header">
+                    <router-link
+                        to="/"
+                        class="nav-link offcanvas-title fs-2"
+                        id="offcanvasNavbarLabel"
+                        >About</router-link
+                    >
+                    <button
+                        type="button"
+                        class="btn-close bg-light"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Закрыть"
+                    ></button>
+                </div>
+                <div class="offcanvas-body">
+                    <router-link to="/addstamp" class="nav-link py-2"
+                        >AddStamp</router-link
+                    >
+                    <router-link to="/addstamp" class="nav-link py-2"
+                        >UpdateStamp</router-link
+                    >
+                    <router-link to="/deletestamp" class="nav-link py-2"
+                        >DeleteStamp</router-link
+                    >
+                </div>
+            </div>
+        </div>
     </nav>
 </template>
 <script>
@@ -24,21 +55,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .router-link-active {
-    position: relative;
-    background: white;
-    color: black;
-    &:after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        transform: translateY(-100%);
-        background: white;
-        border-radius: 0 0 20px 0;
-
-        content: '';
-        background: red;
-        width: 20px;
-        height: 20px;
-    }
+    color: gold !important;
 }
 </style>

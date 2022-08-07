@@ -7,9 +7,9 @@ const routes = [
         component: () => import('../views/About.vue'),
     },
     {
-        path: '/stamp',
+        path: '/addstamp',
         name: 'stamp',
-        component: () => import('../views/Stamp.vue'),
+        component: () => import('../views/AddStamp.vue'),
     },
 ];
 
