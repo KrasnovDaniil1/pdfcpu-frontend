@@ -6,12 +6,7 @@
             >
                 <span>InFile:</span>
                 <label class="form-label">
-                    <input
-                        class="form-control fs-5"
-                        type="file"
-                        @change="onUploadInFile"
-                        ref="inFile"
-                    />
+                    <input class="form-control fs-5" type="file" ref="inFile" />
                 </label>
             </div>
             <div
@@ -86,6 +81,20 @@
                     />
                 </label>
             </div>
+            <div
+                class="my-4 d-flex justify-content-between flex-md-row flex-column flex-md-row flex-column"
+                v-if="mode == 'pdf'"
+            >
+                <span>PagePdfMode:</span>
+                <label class="form-label">
+                    <input
+                        class="form-control fs-5"
+                        type="text"
+                        v-model="pagePdfMode"
+                        placeholder="1"
+                    />
+                </label>
+            </div>
             <div class="my-4 form-group" v-if="mode == 'text'">
                 <span>TextMode:</span>
                 <textarea
@@ -103,7 +112,6 @@
                     <input
                         class="form-control fs-5"
                         type="file"
-                        @change="onUploadFileMode"
                         ref="fileMode"
                     />
                 </label>
@@ -116,13 +124,24 @@
                     rows="5"
                 ></textarea>
             </div>
-            <button class="btn btn-primary" @click.prevent="SubmitData">
+            <button class="btn btn-primary fs-4" @click.prevent="SubmitData">
                 Отправить
             </button>
         </form>
         <div class="vr d-none d-xxl-block mx-5"></div>
         <div class="my-4">
             <span class="text-danger fs-3" v-if="error">{{ error }}</span>
+        </div>
+        <div class="card my-4 mx-auto" v-if="urlFile">
+            <h5 class="card-header fs-3">Файл готов.</h5>
+            <div
+                class="card-body d-flex justify-content-center flex-column fs-3"
+            >
+                <p class="card-text">Ссылка будет действовать 3 минуты.</p>
+                <a :href="urlFile" target="_blank" class="btn btn-success fs-3"
+                    >Скачать Файл.</a
+                >
+            </div>
         </div>
     </div>
 </template>
@@ -136,27 +155,43 @@ export default {
         const onTop = ref('true');
         const selectedPages = ref('all');
         const textMode = ref('Test...');
-        const description = ref('df...');
+        const description = ref('');
         const fileMode = ref();
         const inFile = ref();
-        const error = ref('ad');
+        const pagePdfMode = ref('1');
 
-        const onUploadFileMode = () => {
-            console.log(fileMode.value.files);
-        };
-        const onUploadInFile = () => {
-            console.log(inFile.value.files);
-        };
-        const SubmitData = () => {
-            AddStamp(
+        const urlFile = ref();
+
+        const error = ref();
+
+        const SubmitData = async () => {
+            let data = await AddStamp(
                 inFile.value,
                 mode.value,
                 onTop.value,
                 selectedPages.value,
                 textMode.value,
                 fileMode.value,
+                pagePdfMode.value,
                 description.value
             );
+            error.value = '';
+
+            // error.value = '';
+            // inFile.value = undefined;
+            // mode.value = 'text';
+            // onTop.value = true;
+            // selectedPages.value = 'all';
+            // textMode.value = 'Test ...';
+            // fileMode.value = undefined;
+            // pagePdfMode.value = '1';
+            // description.value = '';
+            // urlFile.value = undefined;
+            if (data.error != undefined) {
+                error.value = data.error;
+            } else {
+                urlFile.value = data.file;
+            }
         };
 
         return {
@@ -168,8 +203,8 @@ export default {
             fileMode,
             description,
             error,
-            onUploadInFile,
-            onUploadFileMode,
+            pagePdfMode,
+            urlFile,
             SubmitData,
         };
     },

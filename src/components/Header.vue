@@ -37,7 +37,7 @@
                     <router-link to="/addstamp" class="nav-link py-2"
                         >AddStamp</router-link
                     >
-                    <router-link to="/addstamp" class="nav-link py-2"
+                    <router-link to="/updatestamp" class="nav-link py-2"
                         >UpdateStamp</router-link
                     >
                     <router-link to="/deletestamp" class="nav-link py-2"
