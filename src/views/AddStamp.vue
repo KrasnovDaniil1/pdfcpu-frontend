@@ -69,6 +69,31 @@
                 </div>
             </div>
             <div
+                class="my-4 d-flex justify-content-between flex-md-row flex-column"
+            >
+                <span>Update:</span>
+                <div>
+                    <label class="form-label mx-3 fs-5">
+                        true
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            value="true"
+                            v-model="update"
+                        />
+                    </label>
+                    <label class="form-label fs-5">
+                        false
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            value="false"
+                            v-model="update"
+                        />
+                    </label>
+                </div>
+            </div>
+            <div
                 class="my-4 d-flex justify-content-between flex-md-row flex-column flex-md-row flex-column"
             >
                 <span>SelectedPages:</span>
@@ -100,7 +125,7 @@
                 <textarea
                     class="form-control fs-5 my-3"
                     v-model="textMode"
-                    rows="5"
+                    rows="4"
                 ></textarea>
             </div>
             <div
@@ -121,7 +146,7 @@
                 <textarea
                     class="form-control fs-5 my-3"
                     v-model="description"
-                    rows="5"
+                    rows="4"
                 ></textarea>
             </div>
             <button class="btn btn-primary fs-4" @click.prevent="SubmitData">
@@ -137,7 +162,7 @@
             <div
                 class="card-body d-flex justify-content-center flex-column fs-3"
             >
-                <p class="card-text">Ссылка будет действовать 3 минуты.</p>
+                <p class="card-text">Ссылка будет действовать 7 дней.</p>
                 <a :href="urlFile" target="_blank" class="btn btn-success fs-3"
                     >Скачать Файл.</a
                 >
@@ -159,6 +184,7 @@ export default {
         const fileMode = ref();
         const inFile = ref();
         const pagePdfMode = ref('1');
+        const update = ref(false);
 
         const urlFile = ref();
 
@@ -169,6 +195,7 @@ export default {
                 inFile.value,
                 mode.value,
                 onTop.value,
+                update.value,
                 selectedPages.value,
                 textMode.value,
                 fileMode.value,
@@ -177,16 +204,6 @@ export default {
             );
             error.value = '';
 
-            // error.value = '';
-            // inFile.value = undefined;
-            // mode.value = 'text';
-            // onTop.value = true;
-            // selectedPages.value = 'all';
-            // textMode.value = 'Test ...';
-            // fileMode.value = undefined;
-            // pagePdfMode.value = '1';
-            // description.value = '';
-            // urlFile.value = undefined;
             if (data.error != undefined) {
                 error.value = data.error;
             } else {
@@ -205,6 +222,7 @@ export default {
             error,
             pagePdfMode,
             urlFile,
+            update,
             SubmitData,
         };
     },

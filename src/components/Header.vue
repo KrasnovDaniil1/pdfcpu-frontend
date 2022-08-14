@@ -33,12 +33,9 @@
                         aria-label="Закрыть"
                     ></button>
                 </div>
-                <div class="offcanvas-body">
+                <div class="offcanvas-body fs-3">
                     <router-link to="/addstamp" class="nav-link py-2"
                         >AddStamp</router-link
-                    >
-                    <router-link to="/updatestamp" class="nav-link py-2"
-                        >UpdateStamp</router-link
                     >
                     <router-link to="/deletestamp" class="nav-link py-2"
                         >DeleteStamp</router-link
