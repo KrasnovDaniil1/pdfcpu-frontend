@@ -34,12 +34,12 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { DeleteStamp } from '../api/stamp';
+import { Collect } from '../api/collect';
+
 import Error from '../components/Error.vue';
 import FileReady from '../components/FileReady.vue';
-
 export default {
-    name: 'DeleteStamp',
+    name: 'Collect',
     components: {
         Error,
         FileReady,
@@ -51,7 +51,7 @@ export default {
         const error = ref();
 
         const SubmitData = async () => {
-            let data = await DeleteStamp(inFile.value, selectedPages.value);
+            let data = await Collect(inFile.value, selectedPages.value);
             error.value = '';
             if (data.error != undefined) {
                 error.value = data.error;

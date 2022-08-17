@@ -8,8 +8,18 @@ const routes = [
     },
     {
         path: '/addstamp',
-        name: 'stamp',
+        name: 'addstamp',
         component: () => import('../views/AddStamp.vue'),
+    },
+    {
+        path: '/deletestamp',
+        name: 'deletestamp',
+        component: () => import('../views/DeleteStamp.vue'),
+    },
+    {
+        path: '/collect',
+        name: 'collect',
+        component: () => import('../views/Collect.vue'),
     },
 ];
 

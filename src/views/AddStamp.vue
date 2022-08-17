@@ -154,27 +154,22 @@
             </button>
         </form>
         <div class="vr d-none d-xxl-block mx-5"></div>
-        <div class="my-4">
-            <span class="text-danger fs-3" v-if="error">{{ error }}</span>
-        </div>
-        <div class="card my-4 mx-auto" v-if="urlFile">
-            <h5 class="card-header fs-3">Файл готов.</h5>
-            <div
-                class="card-body d-flex justify-content-center flex-column fs-3"
-            >
-                <p class="card-text">Ссылка будет действовать 7 дней.</p>
-                <a :href="urlFile" target="_blank" class="btn btn-success fs-3"
-                    >Скачать Файл.</a
-                >
-            </div>
-        </div>
+        <FileReady :url="urlFile" />
+        <Error :err="error" />
     </div>
 </template>
 <script>
 import { ref } from 'vue';
 import { AddStamp } from '../api/stamp';
+import Error from '../components/Error.vue';
+import FileReady from '../components/FileReady.vue';
+
 export default {
     name: 'AddStamp',
+    components: {
+        Error,
+        FileReady,
+    },
     setup() {
         const mode = ref('text');
         const onTop = ref('true');
