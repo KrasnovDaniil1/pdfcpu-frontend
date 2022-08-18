@@ -2,8 +2,13 @@
 <span>Проект создан для работы с документами формата pdf. Работает в связки с бэкендом. pdfcpu-RestApi.</span>
 <h1>Как запустить проект:</h1>
 <ul>
-    <li>npm install</li>
-    <li>npm run serve</li>
+    <li>
+        <span>Запустить в докере:</span>
+        <ul>
+            <li>docker build -t pdfcpu_front .</li>
+            <li>docker run -it -p 8080:8080 pdfcpu_front</li>
+        </ul>
+    </li>
 </ul>
 </h1>
 <img src="./README-IMAGE/1.png"/>
