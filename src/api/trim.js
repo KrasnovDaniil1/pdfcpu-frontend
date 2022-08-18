@@ -2,13 +2,13 @@ import axios from 'axios';
 
 import { API } from './api';
 
-export const Collect = (inFile, selectedPages) => {
+export const Trim = (inFile, selectedPages) => {
     var formdata = new FormData();
     formdata.append('inFile', inFile.files[0]);
     formdata.append('selectedPages', selectedPages);
 
     return axios
-        .post(`${API}/collect`, formdata, {
+        .post(`${API}/trim`, formdata, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

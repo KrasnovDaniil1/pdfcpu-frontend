@@ -40,6 +40,27 @@
                     <router-link to="/deletestamp" class="nav-link py-2"
                         >DeleteStamp</router-link
                     >
+                    <router-link to="/collect" class="nav-link py-2"
+                        >Collect</router-link
+                    >
+                    <router-link to="/crop" class="nav-link py-2"
+                        >Crop</router-link
+                    >
+                    <router-link to="/optimize" class="nav-link py-2"
+                        >Optimize</router-link
+                    >
+                    <router-link to="/rotate" class="nav-link py-2"
+                        >Rotate</router-link
+                    >
+                    <router-link to="/trim" class="nav-link py-2"
+                        >Trim</router-link
+                    >
+                    <router-link to="/split" class="nav-link py-2"
+                        >Split</router-link
+                    >
+                    <router-link to="/merge" class="nav-link py-2"
+                        >Merge</router-link
+                    >
                 </div>
             </div>
         </div>

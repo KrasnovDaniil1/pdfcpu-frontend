@@ -9,63 +9,77 @@
                     <input class="form-control fs-5" type="file" ref="inFile" />
                 </label>
             </div>
+
             <div
                 class="my-4 d-flex justify-content-between flex-md-row flex-column flex-md-row flex-column"
             >
-                <span>SelectedPages:</span>
+                <span>Snap:</span>
                 <label class="form-label">
                     <input
                         class="form-control fs-5"
-                        type="text"
-                        v-model="selectedPages"
-                        placeholder="all"
+                        type="number"
+                        v-model="span"
+                        placeholder="1"
                     />
                 </label>
             </div>
-            
-
             <button class="btn btn-primary fs-4" @click.prevent="SubmitData">
                 Отправить
             </button>
         </form>
         <div class="vr d-none d-xxl-block mx-5"></div>
-        <FileReady :url="urlFile" />
+        <div class="card my-4 mx-auto" v-if="urlFiles">
+            <h5 class="card-header fs-3">Файл готов.</h5>
+            <div
+                class="card-body d-flex justify-content-center flex-column fs-3"
+            >
+                <p class="card-text">Ссылка будет действовать 7 дней.</p>
+                <a
+                    v-for="(item, index) in urlFiles"
+                    :href="url"
+                    target="_blank"
+                    class="btn btn-success fs-3"
+                    :key="index"
+                    >Скачать Файл.</a
+                >
+            </div>
+        </div>
         <Error :err="error" />
     </div>
 </template>
 <script>
 import { ref } from 'vue';
-import { Collect } from '../api/collect';
+import { Split } from '../api/split';
 
 import Error from '../components/Error.vue';
-import FileReady from '../components/FileReady.vue';
 export default {
-    name: 'Collect',
+    name: 'Split',
     components: {
         Error,
-        FileReady,
     },
     setup() {
-        const selectedPages = ref('all');
         const inFile = ref();
-        const urlFile = ref();
+        const span = ref(1);
+
+        const urlFiles = ref();
+
         const error = ref();
 
         const SubmitData = async () => {
-            let data = await Collect(inFile.value, selectedPages.value);
+            let data = await Split(inFile.value, span.value);
             error.value = '';
             if (data.error != undefined) {
                 error.value = data.error;
             } else {
-                urlFile.value = data.file;
+                urlFiles.value = data.file;
             }
         };
 
         return {
             inFile,
-            urlFile,
+            urlFiles,
             error,
-            selectedPages,
+            span,
             SubmitData,
         };
     },

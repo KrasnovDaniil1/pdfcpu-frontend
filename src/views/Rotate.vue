@@ -22,8 +22,19 @@
                     />
                 </label>
             </div>
-            
-
+            <div
+                class="my-4 d-flex justify-content-between flex-md-row flex-column flex-md-row flex-column"
+            >
+                <span>Rotate:</span>
+                <label class="form-label">
+                    <input
+                        class="form-control fs-5"
+                        type="number"
+                        v-model="rotate"
+                        placeholder="90"
+                    />
+                </label>
+            </div>
             <button class="btn btn-primary fs-4" @click.prevent="SubmitData">
                 Отправить
             </button>
@@ -35,24 +46,31 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { Collect } from '../api/collect';
+import { Crop } from '../api/crop';
 
 import Error from '../components/Error.vue';
 import FileReady from '../components/FileReady.vue';
 export default {
-    name: 'Collect',
+    name: 'Rotate',
     components: {
         Error,
         FileReady,
     },
     setup() {
-        const selectedPages = ref('all');
         const inFile = ref();
+        const selectedPages = ref('all');
+        const rotate = ref();
+
         const urlFile = ref();
+
         const error = ref();
 
         const SubmitData = async () => {
-            let data = await Collect(inFile.value, selectedPages.value);
+            let data = await Crop(
+                inFile.value,
+                selectedPages.value,
+                rotate.value
+            );
             error.value = '';
             if (data.error != undefined) {
                 error.value = data.error;
@@ -66,6 +84,7 @@ export default {
             urlFile,
             error,
             selectedPages,
+            rotate,
             SubmitData,
         };
     },

@@ -22,8 +22,15 @@
                     />
                 </label>
             </div>
-            
-
+            <div class="my-4 form-group">
+                <span>Description:</span>
+                <textarea
+                    class="form-control fs-5 my-3"
+                    v-model="description"
+                    rows="4"
+                    placeholder="[0 0 200 200]"
+                ></textarea>
+            </div>
             <button class="btn btn-primary fs-4" @click.prevent="SubmitData">
                 Отправить
             </button>
@@ -35,24 +42,31 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { Collect } from '../api/collect';
+import { Crop } from '../api/crop';
 
 import Error from '../components/Error.vue';
 import FileReady from '../components/FileReady.vue';
 export default {
-    name: 'Collect',
+    name: 'Crop',
     components: {
         Error,
         FileReady,
     },
     setup() {
-        const selectedPages = ref('all');
         const inFile = ref();
+        const selectedPages = ref('all');
+        const description = ref('');
+
         const urlFile = ref();
+
         const error = ref();
 
         const SubmitData = async () => {
-            let data = await Collect(inFile.value, selectedPages.value);
+            let data = await Crop(
+                inFile.value,
+                selectedPages.value,
+                description.value
+            );
             error.value = '';
             if (data.error != undefined) {
                 error.value = data.error;
@@ -66,6 +80,7 @@ export default {
             urlFile,
             error,
             selectedPages,
+            description,
             SubmitData,
         };
     },

@@ -22,7 +22,6 @@
                     />
                 </label>
             </div>
-            
 
             <button class="btn btn-primary fs-4" @click.prevent="SubmitData">
                 Отправить
@@ -35,7 +34,7 @@
 </template>
 <script>
 import { ref } from 'vue';
-import { Collect } from '../api/collect';
+import { Trim } from '../api/trim';
 
 import Error from '../components/Error.vue';
 import FileReady from '../components/FileReady.vue';
@@ -46,13 +45,15 @@ export default {
         FileReady,
     },
     setup() {
-        const selectedPages = ref('all');
         const inFile = ref();
+        const selectedPages = ref('all');
+
         const urlFile = ref();
+
         const error = ref();
 
         const SubmitData = async () => {
-            let data = await Collect(inFile.value, selectedPages.value);
+            let data = await Trim(inFile.value, selectedPages.value);
             error.value = '';
             if (data.error != undefined) {
                 error.value = data.error;
